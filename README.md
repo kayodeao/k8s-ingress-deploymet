@@ -70,11 +70,33 @@ This guide covers the steps to deploy an application to Kubernetes, set up Ingre
 ### Step 2: Set Up Ingress for Routing Traffic
 
 1. Install the NGINX Ingress Controller using Helm:
-
-    ```sh
+     ```
     helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-    helm repo update
-    helm install ingress-nginx ingress-nginx/ingress-nginx
+    helm search repo ingress-nginx --versions
+    ```
+
+From the app version we select the version that matches the compatibility matrix. </br>
+
+    ```
+    NAME                            CHART VERSION   APP VERSION     DESCRIPTION
+    ingress-nginx/ingress-nginx     4.4.0           1.5.1           Ingress controller for Kubernetes using NGINX a...
+    ```
+
+Now we can use `helm` to install the chart directly if we want. </br>
+Or we can use `helm` to grab the manifest and explore its content. </br>
+We can also add that manifest to our git repo if we are using a GitOps workflow to deploy it. </br>
+
+    ```
+    CHART_VERSION="4.4.0"
+    APP_VERSION="1.5.1"
+    
+    mkdir ./kubernetes/ingress/controller/nginx/manifests/
+    
+    helm template ingress-nginx ingress-nginx \
+    --repo https://kubernetes.github.io/ingress-nginx \
+    --version ${CHART_VERSION} \
+    --namespace ingress-nginx \
+    > ./kubernetes/ingress/controller/nginx/manifests/nginx-ingress.${APP_VERSION}.yaml
     ```
 
 2. Create an Ingress resource file (`ingress.yaml`):
