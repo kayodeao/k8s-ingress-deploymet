@@ -1,6 +1,6 @@
 # Kubernetes Deployment with Ingress and TLS
 
-This guide covers the steps to deploy an application to Kubernetes, set up Ingress for routing traffic, manage TLS certificates with cert-manager, and create a DNS A record.
+This guide covers the steps to deploy an application to Kubernetes, set up Ingress for routing traffic, manage TLS certificates with cert-manager.
 
 ## Prerequisites
 - A Kubernetes cluster
@@ -165,7 +165,7 @@ We can also add that manifest to our git repo if we are using a GitOps workflow 
     kubectl apply -f cluster-issuer.yaml
     ```
 
-### Step 4: Create a DNS A Record
+### Step 4: Create a DNS Record
 
 1. Identify the IP address of the NGINX Ingress Controller's Load Balancer:
 
@@ -173,9 +173,9 @@ We can also add that manifest to our git repo if we are using a GitOps workflow 
     kubectl get svc -n ingress-nginx
     ```
 
-    Look for the EXTERNAL-IP of the `ingress-nginx-controller` service.
+    CHECK for the EXTERNAL-IP of the `ingress-nginx-controller` service.
 
-2. Create an A record in your DNS provider's management console pointing to this IP. 
+2. Create a record in your DNS provider's management console pointing to this IP. 
 
 ### Step 5: Verify Deployment
 
