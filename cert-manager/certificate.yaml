@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1  # Specifies the API version for cert-manager
+kind: Certificate  # Declares the kind of resource being created, which is a Certificate
+metadata:
+  name: mytestapps-cert  # The name of the Certificate resource
+  namespace: default  # The namespace in which the Certificate resource will be created
+spec:
+  dnsNames:
+    - clone.georgeoademo.com.ng  # The first DNS name to be included in the certificate
+    - todoapp.georgeoademo.com.ng # The second DNS name to be included in the certificate
+  secretName: mytestapps-tls  # The name of the Kubernetes Secret resource where the generated certificate and private key will be stored
+  issuerRef:
+    name: letsencrypt-cluster-issuer  # The name of the Issuer or ClusterIssuer resource responsible for signing the certificate
+    kind: ClusterIssuer  # The kind of Issuer; ClusterIssuer is a cluster-wide issuer available across all namespaces
